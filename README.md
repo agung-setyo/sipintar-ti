@@ -33,12 +33,11 @@ php artisan serve
 |          |                   | peminjaman, lihat riwayat sendiri|
 
 ## Dokumentasi
-**|         Dokumen        |            Lokasi              |** 
-  |------------------------|--------------------------------|
-  | Security Requirements  | docs/SRS-Sec.md                |
-  |  (SRS-Sec)             |                                | 
-  | Threat Model & STRIDE  | docs/Threat-Model.md           | 
-  | Vulnerability Report   | docs/Vulnerability-Report.md   |
-  | Hardening Checklist    | docs/Security-Testing-Report.md|
-  | Security Testing Report| docs/Hardening-Checklist.md    |
+| Dokumen | Lokasi |
+|------------------------|--------------------------------|
+| Security Requirements (SRS-Sec) | docs/SRS-Sec.md |
+| Threat Model & STRIDE | docs/Threat-Model.md |
+| Vulnerability Report | docs/Vulnerability-Report.md |
+| Hardening Checklist | docs/Hardening-Checklist.md |
+| Security Testing Report | docs/Security-Testing-Report.md |
 
