@@ -1,26 +1,25 @@
 <?php
-
-include '../config/session.php';
+include_once __DIR__ . '/../config/session.php';
+include_once __DIR__ . '/../config/app.php';
 include_once __DIR__ . '/../config/database.php';
-include '../helpers/log_helper.php';
+include_once __DIR__ . '/../helpers/log_helper.php';
 
 global $conn;
+$previousRole = $_SESSION['role'] ?? null;
 
 if (isset($_SESSION['user_id'])) {
     save_log(
         $conn,
         $_SESSION['user_id'],
-        "LOGOUT",
-        "users",
+        'LOGOUT',
+        'users',
         $_SESSION['user_id'],
-        "User logout"
+        'User logout'
     );
 }
 
-// Hapus semua data session
 $_SESSION = [];
 
-// Hapus cookie session jika ada
 if (ini_get('session.use_cookies')) {
     $params = session_get_cookie_params();
     setcookie(
@@ -37,6 +36,12 @@ if (ini_get('session.use_cookies')) {
 session_unset();
 session_destroy();
 
-header("Location: login.php");
+if ($previousRole === 'admin') {
+    redirect_to('auth/admin_login.php');
+}
+if ($previousRole === 'peminjam') {
+    redirect_to('auth/user_login.php');
+}
+redirect_to('auth/login.php');
 exit;
 ?>

@@ -1,21 +1,21 @@
 <?php
 
-include '../config/session.php';
+include_once __DIR__ . '/../config/session.php';
+include_once __DIR__ . '/../config/app.php';
 include_once __DIR__ . '/../config/database.php';
-include '../config/security.php';
+include_once __DIR__ . '/../config/security.php';
 
-include '../helpers/csrf_helper.php';
-include '../helpers/log_helper.php';
+include_once __DIR__ . '/../helpers/csrf_helper.php';
+include_once __DIR__ . '/../helpers/log_helper.php';
 
 global $conn;
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: register.php");
-    exit;
+    redirect_to('auth/register.php');
 }
 
 if (!isset($_POST['csrf_token']) || !verify_csrf_token($_POST['csrf_token'])) {
-    die("CSRF Token tidak valid");
+    redirect_to('auth/register.php?error=' . urlencode('Sesi tidak valid. Silakan coba lagi.'));
 }
 
 $name = htmlspecialchars(trim($_POST['name'] ?? ''));
@@ -33,24 +33,24 @@ if (
     empty($identity_number)
 ) {
 
-    die("Semua field wajib diisi");
+    redirect_to('auth/register.php?error=' . urlencode('Semua field wajib diisi.'));
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
-    die("Format email tidak valid");
+    redirect_to('auth/register.php?error=' . urlencode('Format email tidak valid.'));
 }
 
 if (strlen($password) < 8) {
 
-    die("Password minimal 8 karakter");
+    redirect_to('auth/register.php?error=' . urlencode('Password minimal 8 karakter.'));
 }
 
 $allowed_identity_types = ['dosen', 'mahasiswa'];
 
 if (!in_array($identity_type, $allowed_identity_types, true)) {
 
-    die("Jenis identitas tidak valid");
+    redirect_to('auth/register.php?error=' . urlencode('Jenis identitas tidak valid.'));
 }
 
 $check = mysqli_prepare(
@@ -66,7 +66,7 @@ $result = mysqli_stmt_get_result($check);
 
 if (mysqli_num_rows($result) > 0) {
 
-    die("Email sudah digunakan");
+    redirect_to('auth/register.php?error=' . urlencode('Email sudah digunakan.'));
 }
 
 $password_hash = password_hash(
@@ -111,9 +111,9 @@ if (mysqli_stmt_execute($stmt)) {
         "User baru berhasil register"
     );
 
-    header("Location: login.php?success=1");
+    redirect_to('auth/user_login.php?success=1');
     exit;
 } else {
-    die("Register gagal");
+    redirect_to('auth/register.php?error=' . urlencode('Register gagal. Silakan coba lagi.'));
 }
 ?>
