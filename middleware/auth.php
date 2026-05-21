@@ -1,10 +1,8 @@
 <?php
-
-include '../config/session.php';
+include_once __DIR__ . '/../config/session.php';
+include_once __DIR__ . '/../config/app.php';
 
 if (!isset($_SESSION['user_id'])) {
-
-    header("Location: ../auth/login.php");
-    exit;
+    redirect_to('auth/login.php');
 }
 ?>

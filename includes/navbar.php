@@ -1,31 +1,28 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-    <div class="container-fluid">
-
-        <a class="navbar-brand"
-        href="#">
-
-            SIPINTAR-TI
-
-        </a>
-
-        <div class="d-flex">
-
-            <span class="text-white me-3">
-
-                <?= $_SESSION['name']; ?>
-
+<?php
+include_once __DIR__ . '/../config/app.php';
+$userName = $_SESSION['name'] ?? 'Pengguna';
+$userRole = $_SESSION['role'] ?? 'guest';
+$homePath = $userRole === 'admin' ? 'admin/dashboard.php' : 'peminjam/dashboard.php';
+?>
+<nav class="topbar">
+    <div class="topbar-left">
+        <button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+        <a class="brand" href="<?= e(base_url($homePath)); ?>">
+            <span class="brand-mark"><i class="fas fa-box-open"></i></span>
+            <span class="brand-copy">
+                <strong>SIPINTAR-TI</strong>
+                <small>Sistem Peminjaman Inventaris</small>
             </span>
-
-            <a href="../auth/logout.php"
-            class="btn btn-danger btn-sm">
-
-                Logout
-
-            </a>
-
-        </div>
-
+        </a>
     </div>
-
+    <div class="topbar-right">
+        <div class="user-chip">
+            <span class="avatar"><?= e(strtoupper(substr($userName, 0, 1))); ?></span>
+            <span>
+                <strong><?= e($userName); ?></strong>
+                <small><?= e($userRole === 'admin' ? 'Admin' : 'Peminjam'); ?></small>
+            </span>
+        </div>
+        <a href="<?= e(base_url('auth/logout.php')); ?>" class="btn btn-outline-danger btn-sm"><i class="fas fa-right-from-bracket"></i> Keluar</a>
+    </div>
 </nav>
