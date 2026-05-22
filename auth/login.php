@@ -2,8 +2,10 @@
 include_once __DIR__ . '/../config/session.php';
 include_once __DIR__ . '/../config/app.php';
 include_once __DIR__ . '/../config/security.php';
-$currentName = $_SESSION['name'] ?? null;
-$currentRole = $_SESSION['role'] ?? null;
+$logins = $_SESSION['logins'] ?? [];
+$adminLoggedIn = isset($logins['admin']);
+$peminjamLoggedIn = isset($logins['peminjam']);
+$currentRole = $_SESSION['current_role'] ?? null;
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -29,8 +31,16 @@ $currentRole = $_SESSION['role'] ?? null;
             <h1>Masuk sesuai jenis akun Anda.</h1>
             <p class="choice-subtitle">Gunakan pintu masuk yang sesuai agar dashboard, menu, dan hak akses tampil dengan benar.</p>
 
-            <?php if ($currentName) : ?>
-                <div class="alert alert-info"><i class="fas fa-user"></i> Saat ini Anda masuk sebagai <?= e($currentName); ?> (<?= e($currentRole === 'admin' ? 'Admin' : 'Peminjam'); ?>). Login melalui halaman lain akan mengganti sesi aktif.</div>
+            <?php if ($adminLoggedIn || $peminjamLoggedIn) : ?>
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i> <strong>Login Aktif:</strong>
+                    <?php if ($adminLoggedIn) : ?>
+                        <span class="badge bg-primary me-2"><i class="fas fa-user-tie"></i> Admin: <?= e($logins['admin']['name']); ?></span>
+                    <?php endif; ?>
+                    <?php if ($peminjamLoggedIn) : ?>
+                        <span class="badge bg-success"><i class="fas fa-user-graduate"></i> Peminjam: <?= e($logins['peminjam']['name']); ?></span>
+                    <?php endif; ?>
+                </div>
             <?php endif; ?>
             <?php if (isset($_GET['success'])) : ?><div class="alert alert-success"><i class="fas fa-check-circle"></i> Registrasi berhasil. Silakan login sebagai peminjam.</div><?php endif; ?>
             <?php if (isset($_GET['error'])) : ?><div class="alert alert-danger"><i class="fas fa-circle-exclamation"></i> <?= e($_GET['error']); ?></div><?php endif; ?>
@@ -38,12 +48,20 @@ $currentRole = $_SESSION['role'] ?? null;
             <div class="choice-grid">
                 <a class="choice-option admin-option" href="<?= e(base_url('auth/admin_login.php')); ?>">
                     <span class="choice-icon"><i class="fas fa-user-tie"></i></span>
-                    <span class="choice-content"><strong>Login Admin</strong><small>Kelola barang, kategori, stok, dan permintaan peminjaman.</small></span>
+                    <span class="choice-content">
+                        <strong>Login Admin</strong>
+                        <small>Kelola barang, kategori, stok, dan permintaan peminjaman.</small>
+                        <?php if ($adminLoggedIn) : ?><span class="badge bg-primary position-absolute top-0 end-0">Sudah Login</span><?php endif; ?>
+                    </span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
                 <a class="choice-option user-option" href="<?= e(base_url('auth/user_login.php')); ?>">
                     <span class="choice-icon"><i class="fas fa-user-graduate"></i></span>
-                    <span class="choice-content"><strong>Login Peminjam</strong><small>Ajukan peminjaman barang dan pantau status permintaan.</small></span>
+                    <span class="choice-content">
+                        <strong>Login Peminjam</strong>
+                        <small>Ajukan peminjaman barang dan pantau status permintaan.</small>
+                        <?php if ($peminjamLoggedIn) : ?><span class="badge bg-success position-absolute top-0 end-0">Sudah Login</span><?php endif; ?>
+                    </span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
             </div>

@@ -4,8 +4,9 @@ include_once __DIR__ . '/../config/app.php';
 include_once __DIR__ . '/../config/security.php';
 include_once __DIR__ . '/../helpers/csrf_helper.php';
 $csrf = generate_csrf_token();
-$currentName = $_SESSION['name'] ?? null;
-$currentRole = $_SESSION['role'] ?? null;
+$logins = $_SESSION['logins'] ?? [];
+$adminLoggedIn = isset($logins['admin']);
+$peminjamLoggedIn = isset($logins['peminjam']);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -37,11 +38,6 @@ $currentRole = $_SESSION['role'] ?? null;
                     <h2>Login Peminjam</h2>
                     <p>Gunakan akun peminjam yang sudah terdaftar.</p>
                 </div>
-                <?php if ($currentName && $currentRole !== 'peminjam') : ?>
-                    <div class="alert alert-warning"><i class="fas fa-repeat"></i> Anda sedang masuk sebagai admin. Login peminjam akan mengganti sesi aktif.</div>
-                <?php elseif ($currentName && $currentRole === 'peminjam') : ?>
-                    <div class="alert alert-info"><i class="fas fa-user-check"></i> Anda sudah masuk sebagai peminjam. Login ulang akan memperbarui sesi.</div>
-                <?php endif; ?>
                 <?php if (isset($_GET['success'])) : ?><div class="alert alert-success"><i class="fas fa-check-circle"></i> Registrasi berhasil. Silakan login.</div><?php endif; ?>
                 <?php if (isset($_GET['error'])) : ?><div class="alert alert-danger"><i class="fas fa-circle-exclamation"></i> <?= e($_GET['error']); ?></div><?php endif; ?>
                 <form action="<?= e(base_url('auth/process_login.php')); ?>" method="POST" autocomplete="on">

@@ -93,17 +93,41 @@ if (!$validPassword || !$activeUser || !$roleMatches) {
     redirect_login_error('Email atau password salah.', $loginAs);
 }
 
+// Backup login attempts
 $old_attempt = $_SESSION[$attempt_key] ?? null;
+$csrf_token = $_SESSION['csrf_token'] ?? null;
+
+// Initialize multi-login structure if not exists
+if (!isset($_SESSION['logins'])) {
+    $_SESSION['logins'] = [];
+}
+
+// Remove old attempts but preserve login data
+$preserved_logins = $_SESSION['logins'];
 $_SESSION = [];
+$_SESSION['logins'] = $preserved_logins;
 if ($old_attempt !== null) {
     $_SESSION[$attempt_key] = $old_attempt;
 }
+if ($csrf_token !== null) {
+    $_SESSION['csrf_token'] = $csrf_token;
+}
+
 session_regenerate_id(true);
 unset($_SESSION[$attempt_key]);
 
+// Store login data for this role
+$_SESSION['logins'][$loginAs] = [
+    'user_id' => (int)$user['id'],
+    'name' => $user['name'],
+    'identity_type' => $user['identity_type']
+];
+
+// Set current active role
+$_SESSION['current_role'] = $loginAs;
 $_SESSION['user_id'] = (int)$user['id'];
 $_SESSION['name'] = $user['name'];
-$_SESSION['role'] = $user['role'];
+$_SESSION['role'] = $loginAs;
 $_SESSION['identity_type'] = $user['identity_type'];
 $_SESSION['last_activity'] = time();
 

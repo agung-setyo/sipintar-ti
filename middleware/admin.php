@@ -1,7 +1,9 @@
 <?php
 include_once __DIR__ . '/auth.php';
 
-if (($_SESSION['role'] ?? '') !== 'admin') {
+// Check if admin role is logged in (allow switching between roles)
+if (!isset($_SESSION['logins']['admin'])) {
+    // Only destroy session if trying to access admin area without any admin login
     $_SESSION = [];
     if (ini_get('session.use_cookies')) {
         $params = session_get_cookie_params();
@@ -9,5 +11,14 @@ if (($_SESSION['role'] ?? '') !== 'admin') {
     }
     session_destroy();
     redirect_to('auth/admin_login.php?error=' . urlencode('Silakan login menggunakan akun admin.'));
+}
+
+// Switch context to admin if accessing admin area
+if (($_SESSION['current_role'] ?? '') !== 'admin' && isset($_SESSION['logins']['admin'])) {
+    $_SESSION['current_role'] = 'admin';
+    $_SESSION['user_id'] = $_SESSION['logins']['admin']['user_id'];
+    $_SESSION['name'] = $_SESSION['logins']['admin']['name'];
+    $_SESSION['role'] = 'admin';
+    $_SESSION['identity_type'] = $_SESSION['logins']['admin']['identity_type'] ?? '';
 }
 ?>
