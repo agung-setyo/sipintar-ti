@@ -1,7 +1,9 @@
 {
   "name": "sipintar-ti/sipintar-ti",
   "description": "Sistem Peminjaman Inventaris - SIPINTAR-TI",
-  "require": {},
+  "require": {
+    "sentry/sentry-php": "^3.5"
+  },
   "require-dev": {
     "phpunit/phpunit": "^9.6"
   },

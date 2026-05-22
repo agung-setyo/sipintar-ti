@@ -8,6 +8,11 @@ if (!defined('APP_NAME')) {
     define('APP_NAME', 'SIPINTAR-TI');
 }
 
+// Optional: initialize Sentry if sample file exists and package is installed
+if (file_exists(__DIR__ . '/../includes/sentry.php')) {
+    include_once __DIR__ . '/../includes/sentry.php';
+}
+
 if (!function_exists('app_base_path')) {
     function app_base_path(): string
     {
