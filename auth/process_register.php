@@ -13,17 +13,21 @@ global $conn;
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect_to('auth/register.php');
 }
-
 if (!isset($_POST['csrf_token']) || !verify_csrf_token($_POST['csrf_token'])) {
-    redirect_to('auth/register.php?error=' . urlencode('Sesi tidak valid. Silakan coba lagi.'));
+    save_security_event($conn, 'CSRF_INVALID_REGISTER', 'high', null, 'Token CSRF register tidak valid');
+    redirect_to('auth/register.php?error=' . urlencode('Token sesi (CSRF) tidak valid. Muat ulang halaman dan coba lagi.'));
 }
 
-$name = htmlspecialchars(trim($_POST['name'] ?? ''));
-$email = strtolower(htmlspecialchars(trim($_POST['email'] ?? '')));
+include_once __DIR__ . '/../helpers/validation_helper.php';
+
+$post = sanitize_post();
+
+$name = $post['name'] ?? '';
+$email = strtolower($post['email'] ?? '');
 $password = $_POST['password'] ?? '';
 
-$identity_type = htmlspecialchars(trim($_POST['identity_type'] ?? ''));
-$identity_number = htmlspecialchars(trim($_POST['identity_number'] ?? ''));
+$identity_type = $post['identity_type'] ?? '';
+$identity_number = $post['identity_number'] ?? '';
 
 if (
     empty($name) ||
@@ -36,13 +40,11 @@ if (
     redirect_to('auth/register.php?error=' . urlencode('Semua field wajib diisi.'));
 }
 
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
+if (!validate_email($email)) {
     redirect_to('auth/register.php?error=' . urlencode('Format email tidak valid.'));
 }
 
-if (strlen($password) < 8) {
-
+if (!validate_password($password)) {
     redirect_to('auth/register.php?error=' . urlencode('Password minimal 8 karakter.'));
 }
 

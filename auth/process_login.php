@@ -29,7 +29,7 @@ if (!in_array($loginAs, ['admin', 'peminjam'], true)) {
 
 if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
     save_security_event($conn, 'CSRF_INVALID_LOGIN', 'high', null, 'Token CSRF login tidak valid');
-    redirect_login_error('Sesi tidak valid. Silakan coba lagi.', $loginAs);
+    redirect_login_error('Token sesi (CSRF) tidak valid. Muat ulang halaman dan coba lagi.', $loginAs);
 }
 
 $ip = client_ip();

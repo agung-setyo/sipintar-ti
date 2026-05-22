@@ -16,13 +16,13 @@ $homePath = $userRole === 'admin' ? 'admin/dashboard.php' : 'peminjam/dashboard.
         </a>
     </div>
     <div class="topbar-right">
-        <div class="user-chip">
-            <span class="avatar"><?= e(strtoupper(substr($userName, 0, 1))); ?></span>
+        <div class="user-chip" aria-hidden="false">
+            <span class="avatar" aria-hidden="true"><?= e(strtoupper(substr($userName, 0, 1))); ?></span>
             <span>
                 <strong><?= e($userName); ?></strong>
                 <small><?= e($userRole === 'admin' ? 'Admin' : 'Peminjam'); ?></small>
             </span>
         </div>
-        <a href="<?= e(base_url('auth/logout.php')); ?>" class="btn btn-outline-danger btn-sm"><i class="fas fa-right-from-bracket"></i> Keluar</a>
+        <a href="<?= e(base_url('auth/logout.php')); ?>" class="btn btn-outline-danger btn-sm" aria-label="Keluar dari akun"><i class="fas fa-right-from-bracket"></i> Keluar</a>
     </div>
 </nav>

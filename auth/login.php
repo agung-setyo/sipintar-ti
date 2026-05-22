@@ -32,8 +32,7 @@ $currentRole = $_SESSION['current_role'] ?? null;
             <p class="choice-subtitle">Gunakan pintu masuk yang sesuai agar dashboard, menu, dan hak akses tampil dengan benar.</p>
 
             <?php if ($adminLoggedIn || $peminjamLoggedIn) : ?>
-                <div class="alert alert-success">
-                    <i class="fas fa-check-circle"></i> <strong>Login Aktif:</strong>
+                <div class="alert alert-success" role="status" aria-live="polite" id="active-logins"><i class="fas fa-check-circle"></i> <strong>Login Aktif:</strong>
                     <?php if ($adminLoggedIn) : ?>
                         <span class="badge bg-primary me-2"><i class="fas fa-user-tie"></i> Admin: <?= e($logins['admin']['name']); ?></span>
                     <?php endif; ?>

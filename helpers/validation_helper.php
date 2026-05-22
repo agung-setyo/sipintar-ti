@@ -17,7 +17,26 @@ function validate_email($email)
 
 function validate_password($password)
 {
-    return strlen($password) >= 6;
+    // Enforce stronger password minimum length
+    return is_string($password) && strlen($password) >= 8;
+}
+
+function sanitize_array(array $input): array
+{
+    $out = [];
+    foreach ($input as $k => $v) {
+        if (is_string($v)) {
+            $out[$k] = clean_input($v);
+        } else {
+            $out[$k] = $v;
+        }
+    }
+    return $out;
+}
+
+function sanitize_post(): array
+{
+    return sanitize_array($_POST);
 }
 
 function validate_required($data)

@@ -38,18 +38,18 @@ $peminjamLoggedIn = isset($logins['peminjam']);
                     <h2>Login Peminjam</h2>
                     <p>Gunakan akun peminjam yang sudah terdaftar.</p>
                 </div>
-                <?php if (isset($_GET['success'])) : ?><div class="alert alert-success"><i class="fas fa-check-circle"></i> Registrasi berhasil. Silakan login.</div><?php endif; ?>
-                <?php if (isset($_GET['error'])) : ?><div class="alert alert-danger"><i class="fas fa-circle-exclamation"></i> <?= e($_GET['error']); ?></div><?php endif; ?>
-                <form action="<?= e(base_url('auth/process_login.php')); ?>" method="POST" autocomplete="on">
+                <?php if (isset($_GET['success'])) : ?><div class="alert alert-success" role="status" aria-live="polite" id="form-success"><i class="fas fa-check-circle"></i> Registrasi berhasil. Silakan login.</div><?php endif; ?>
+                <?php if (isset($_GET['error'])) : ?><div class="alert alert-danger" role="alert" aria-live="assertive" id="form-error"><i class="fas fa-circle-exclamation"></i> <?= e($_GET['error']); ?></div><?php endif; ?>
+                <form action="<?= e(base_url('auth/process_login.php')); ?>" method="POST" autocomplete="on" novalidate aria-describedby="form-error form-success">
                     <input type="hidden" name="csrf_token" value="<?= e($csrf); ?>">
                     <input type="hidden" name="login_as" value="peminjam">
                     <div class="form-group">
                         <label class="form-label" for="email"><i class="fas fa-envelope"></i> Email</label>
-                        <div class="input-wrap"><i class="fas fa-at"></i><input type="email" id="email" name="email" class="form-control" placeholder="nama@email.com" required autofocus></div>
+                        <div class="input-wrap"><i class="fas fa-at"></i><input type="email" id="email" name="email" class="form-control" placeholder="nama@email.com" required autofocus aria-required="true"></div>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="password"><i class="fas fa-key"></i> Password</label>
-                        <div class="input-wrap"><i class="fas fa-lock"></i><input type="password" id="password" name="password" class="form-control" placeholder="Masukkan password" required></div>
+                        <div class="input-wrap"><i class="fas fa-lock"></i><input type="password" id="password" name="password" class="form-control" placeholder="Masukkan password" required aria-required="true"></div>
                     </div>
                     <label class="password-toggle"><input type="checkbox" onclick="togglePassword()"> Tampilkan password</label>
                     <button type="submit" class="btn-auth"><i class="fas fa-right-to-bracket"></i> Masuk sebagai Peminjam</button>

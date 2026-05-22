@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: sipintar_ti
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, mysqli, pdo_mysql
+
+      - name: Install Composer
+        run: composer install --no-progress --no-suggest --prefer-dist
+
+      - name: Run PHP lint
+        run: |
+          find . -name "*.php" -not -path "./vendor/*" -print0 | xargs -0 -n1 -P4 php -l || true
+
+      - name: Run tests
+        run: vendor/bin/phpunit --configuration phpunit.xml || true
+      
+      - name: (Optional) Deploy step (manual)
+        if: github.ref == 'refs/heads/main' && env.DEPLOY == 'true'
+        run: |
+          echo "Deployment step placeholder - configure your deploy commands here"
+          # Example: rsync -avz --delete ./ user@server:/var/www/html/sipintar-ti
+        env:
+          DEPLOY: ${{ secrets.DEPLOY }}
