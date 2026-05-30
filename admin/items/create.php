@@ -42,7 +42,7 @@ $pageTitle = 'Tambah Barang';
     <?php include __DIR__ . '/../../includes/sidebar.php'; ?>
     <main class="main-content">
         <div class="page-header"><div class="header-row"><div><h1>Tambah Barang</h1><p>Lengkapi data barang baru yang akan masuk inventaris.</p></div><a href="<?= e(base_url('admin/items/index.php')); ?>" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Kembali</a></div></div>
-        <div class="form-card" style="max-width:920px"><div class="card-header-clean"><h3>Data Barang</h3></div><div class="card-body-clean">
+        <div class="form-card max-w-920"><div class="card-header-clean"><h3>Data Barang</h3></div><div class="card-body-clean">
             <?php if ($error): ?><div class="alert alert-danger"><?= e($error); ?></div><?php endif; ?>
             <form method="POST"><?= csrf_input_field(); ?>
                 <div class="form-grid"><div class="form-group"><label for="category_id">Kategori</label><select id="category_id" name="category_id" class="form-select" required><option value="">Pilih kategori</option><?php while ($cat = mysqli_fetch_assoc($categories)) : ?><option value="<?= (int)$cat['id']; ?>"><?= e($cat['name']); ?></option><?php endwhile; ?></select></div><div class="form-group"><label for="item_code">Kode Barang</label><input type="text" id="item_code" name="item_code" class="form-control" maxlength="50" placeholder="Contoh: PRJ-001" required></div></div>

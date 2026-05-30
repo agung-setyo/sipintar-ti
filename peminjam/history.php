@@ -52,8 +52,8 @@ $statusBadge = ['pending'=>'badge-warning','approved'=>'badge-success','returned
         <?php if (isset($_GET['error'])): ?><div class="alert alert-danger"><?= e($_GET['error']); ?></div><?php endif; ?>
         <div class="filter-card panel-card">
             <form method="GET" class="action-row">
-                <input type="text" name="search" value="<?= e($search); ?>" class="form-control" placeholder="Cari kode, barang, atau keperluan" style="max-width:320px">
-                <select name="status" class="form-select" style="max-width:220px">
+                <input type="text" name="search" value="<?= e($search); ?>" class="form-control max-w-320" placeholder="Cari kode, barang, atau keperluan">
+                <select name="status" class="form-select max-w-240">
                     <option value="">Semua Status</option>
                     <?php foreach ($statusLabel as $key => $label): ?>
                         <option value="<?= e($key); ?>" <?= $status_filter === $key ? 'selected' : ''; ?>><?= e($label); ?></option>
@@ -80,7 +80,7 @@ $statusBadge = ['pending'=>'badge-warning','approved'=>'badge-success','returned
                                     <td><?= e(date('d/m/Y H:i', strtotime($row['created_at']))); ?></td>
                                     <td>
                                         <?php if ($row['status'] === 'pending'): ?>
-                                            <form action="<?= e(base_url('peminjam/cancel.php')); ?>" method="POST" onsubmit="return confirm('Batalkan pengajuan ini?');">
+                                            <form action="<?= e(base_url('peminjam/cancel.php')); ?>" method="POST" data-confirm="Batalkan pengajuan ini?">
                                                 <?= csrf_input_field(); ?><input type="hidden" name="id" value="<?= (int)$row['id']; ?>"><button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-xmark"></i> Batalkan</button>
                                             </form>
                                         <?php else: ?>

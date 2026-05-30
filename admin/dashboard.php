@@ -56,8 +56,8 @@ $pageTitle = 'Dashboard Admin';
             <div class="stat-card danger"><div class="stat-card-body"><div class="stat-content"><h5>Sedang Dipinjam</h5><div class="stat-number"><?= $total_active; ?></div><div class="stat-change">Belum dikembalikan</div></div><div class="stat-icon"><i class="fas fa-hand-holding"></i></div></div></div>
         </div>
         <div class="stats-grid">
-            <div class="panel-card"><div class="card-header-clean"><h3>Dikembalikan</h3></div><div class="card-body-clean"><div class="stat-number"><?= $total_returned; ?></div><p class="mb-0" style="color:var(--muted)">Peminjaman selesai.</p></div></div>
-            <div class="panel-card"><div class="card-header-clean"><h3>Ditolak / Batal</h3></div><div class="card-body-clean"><div class="stat-number"><?= $total_rejected; ?></div><p class="mb-0" style="color:var(--muted)">Permintaan tidak dilanjutkan.</p></div></div>
+            <div class="panel-card"><div class="card-header-clean"><h3>Dikembalikan</h3></div><div class="card-body-clean"><div class="stat-number"><?= $total_returned; ?></div><p class="mb-0 text-muted">Peminjaman selesai.</p></div></div>
+            <div class="panel-card"><div class="card-header-clean"><h3>Ditolak / Batal</h3></div><div class="card-body-clean"><div class="stat-number"><?= $total_rejected; ?></div><p class="mb-0 text-muted">Permintaan tidak dilanjutkan.</p></div></div>
             <div class="panel-card"><div class="card-header-clean"><h3>Kelola Data</h3></div><div class="card-body-clean action-row"><a href="<?= e(base_url('admin/items/index.php')); ?>" class="btn btn-primary">Barang</a><a href="<?= e(base_url('admin/categories/index.php')); ?>" class="btn btn-secondary">Kategori</a></div></div>
             <div class="panel-card"><div class="card-header-clean"><h3>Aktivitas</h3></div><div class="card-body-clean"><a href="<?= e(base_url('admin/logs/index.php')); ?>" class="btn btn-info"><i class="fas fa-clock-rotate-left"></i> Lihat Aktivitas</a></div></div>
         </div>

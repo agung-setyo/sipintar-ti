@@ -29,7 +29,7 @@ $pageTitle = 'Kategori Barang';
                                 <td><strong><?= e($row['name']); ?></strong></td>
                                 <td><?= e($row['description'] ?: '-'); ?></td>
                                 <td><span class="badge badge-info"><?= (int)$row['item_count']; ?> barang</span></td>
-                                <td><div class="action-row"><a href="<?= e(base_url('admin/categories/edit.php?id=' . (int)$row['id'])); ?>" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i> Edit</a><form action="<?= e(base_url('admin/categories/delete.php')); ?>" method="POST" onsubmit="return confirm('Hapus kategori ini?');"><?= csrf_input_field(); ?><input type="hidden" name="id" value="<?= (int)$row['id']; ?>"><button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button></form></div></td>
+                                <td><div class="action-row"><a href="<?= e(base_url('admin/categories/edit.php?id=' . (int)$row['id'])); ?>" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i> Edit</a><form action="<?= e(base_url('admin/categories/delete.php')); ?>" method="POST" data-confirm="Hapus kategori ini?"><?= csrf_input_field(); ?><input type="hidden" name="id" value="<?= (int)$row['id']; ?>"><button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button></form></div></td>
                             </tr>
                         <?php endwhile; ?>
                         </tbody>
