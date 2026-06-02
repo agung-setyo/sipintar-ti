@@ -10,13 +10,26 @@ if (isset($_SESSION['role'])) {
 $total_items = 0;
 $total_categories = 0;
 $total_available = 0;
+
+function safe_count(mysqli $conn, string $sql): int
+{
+    try {
+        $result = mysqli_query($conn, $sql);
+        if (!$result) {
+            return 0;
+        }
+        $row = mysqli_fetch_assoc($result);
+        return (int)($row['total'] ?? 0);
+    } catch (mysqli_sql_exception $e) {
+        error_log('Safe count failed: ' . $e->getMessage());
+        return 0;
+    }
+}
+
 if (isset($conn)) {
-    $res = mysqli_query($conn, 'SELECT COUNT(*) AS total FROM items');
-    if ($res) $total_items = (int)mysqli_fetch_assoc($res)['total'];
-    $res = mysqli_query($conn, 'SELECT COUNT(*) AS total FROM categories');
-    if ($res) $total_categories = (int)mysqli_fetch_assoc($res)['total'];
-    $res = mysqli_query($conn, "SELECT COUNT(*) AS total FROM items WHERE status='available' AND stock > 0");
-    if ($res) $total_available = (int)mysqli_fetch_assoc($res)['total'];
+    $total_items = safe_count($conn, 'SELECT COUNT(*) AS total FROM items');
+    $total_categories = safe_count($conn, 'SELECT COUNT(*) AS total FROM categories');
+    $total_available = safe_count($conn, "SELECT COUNT(*) AS total FROM items WHERE status='available' AND stock > 0");
 }
 ?>
 <!DOCTYPE html>
