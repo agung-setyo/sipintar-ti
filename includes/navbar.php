@@ -6,7 +6,7 @@ $homePath = $userRole === 'admin' ? 'admin/dashboard.php' : 'peminjam/dashboard.
 ?>
 <nav class="topbar">
     <div class="topbar-left">
-        <button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+        <button class="sidebar-toggle" type="button" data-action="toggle-sidebar" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
         <a class="brand" href="<?= e(base_url($homePath)); ?>">
             <span class="brand-mark"><i class="fas fa-box-open"></i></span>
             <span class="brand-copy">

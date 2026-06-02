@@ -200,6 +200,11 @@ tbody tr:hover { background: #f8fafc; }
 .alert-danger { background: #fee2e2; color: #991b1b; }
 .alert-warning { background: #fef3c7; color: #92400e; }
 .alert-info { background: #e0f2fe; color: #075985; }
+.max-w-240 { max-width: 240px; }
+.max-w-320 { max-width: 320px; }
+.max-w-760 { max-width: 760px; }
+.max-w-900 { max-width: 900px; }
+.max-w-920 { max-width: 920px; }
 .empty-state { text-align: center; padding: 3rem 1rem; color: var(--muted); }
 .empty-state i { font-size: 2.5rem; opacity: .35; margin-bottom: .8rem; }
 .catalog-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }

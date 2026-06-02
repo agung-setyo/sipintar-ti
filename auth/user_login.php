@@ -24,7 +24,7 @@ $peminjamLoggedIn = isset($logins['peminjam']);
 <body>
     <main class="auth-shell compact-auth">
         <section class="auth-hero">
-            <a class="brand-lockup" href="<?= e(base_url()); ?>" style="text-decoration:none;color:inherit">
+            <a class="brand-lockup" href="<?= e(base_url()); ?>">
                 <div class="brand-icon"><i class="fas fa-box-open"></i></div>
                 <div class="brand-text"><strong>SIPINTAR-TI</strong><small>Sistem Peminjaman Inventaris</small></div>
             </a>
@@ -51,13 +51,13 @@ $peminjamLoggedIn = isset($logins['peminjam']);
                         <label class="form-label" for="password"><i class="fas fa-key"></i> Password</label>
                         <div class="input-wrap"><i class="fas fa-lock"></i><input type="password" id="password" name="password" class="form-control" placeholder="Masukkan password" required aria-required="true"></div>
                     </div>
-                    <label class="password-toggle"><input type="checkbox" onclick="togglePassword()"> Tampilkan password</label>
-                    <button type="submit" class="btn-auth"><i class="fas fa-right-to-bracket"></i> Masuk sebagai Peminjam</button>
+                        <label class="password-toggle"><input type="checkbox" id="show-password"> Tampilkan password</label>
+                        <button type="submit" class="btn-auth"><i class="fas fa-right-to-bracket"></i> Masuk sebagai Peminjam</button>
                 </form>
                 <div class="auth-footer">Belum punya akun? <a href="<?= e(base_url('auth/register.php')); ?>">Daftar sebagai peminjam</a><br><a href="<?= e(base_url('auth/login.php')); ?>">Kembali ke pilihan login</a></div>
             </div>
         </section>
     </main>
-    <script>function togglePassword(){const input=document.getElementById('password');input.type=input.type==='password'?'text':'password';}</script>
+    <script src="<?= e(asset_url('js/auth.js')); ?>?v=20260530-auth"></script>
 </body>
 </html>

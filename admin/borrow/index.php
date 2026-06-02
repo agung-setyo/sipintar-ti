@@ -44,7 +44,7 @@ $statusBadge = ['pending'=>'badge-warning','approved'=>'badge-success','returned
         <?php if (isset($_GET['error'])): ?><div class="alert alert-danger"><?= e($_GET['error']); ?></div><?php endif; ?>
         <div class="filter-card panel-card">
             <form method="GET" class="action-row">
-                <select name="status" class="form-select" style="max-width:240px">
+                <select name="status" class="form-select max-w-240">
                     <option value="">Semua Status</option>
                     <?php foreach ($statusLabel as $key => $label): ?>
                         <option value="<?= e($key); ?>" <?= $status_filter === $key ? 'selected' : ''; ?>><?= e($label); ?></option>
@@ -73,10 +73,10 @@ $statusBadge = ['pending'=>'badge-warning','approved'=>'badge-success','returned
                                     <td>
                                         <div class="action-row">
                                         <?php if ($status === 'pending') : ?>
-                                            <form action="<?= e(base_url('admin/borrow/approve.php')); ?>" method="POST" onsubmit="return confirm('Setujui permintaan ini?');"><?= csrf_input_field(); ?><input type="hidden" name="id" value="<?= (int)$row['id']; ?>"><button class="btn btn-success btn-sm" type="submit"><i class="fas fa-check"></i> Setujui</button></form>
-                                            <form action="<?= e(base_url('admin/borrow/reject.php')); ?>" method="POST" onsubmit="return confirm('Tolak permintaan ini?');"><?= csrf_input_field(); ?><input type="hidden" name="id" value="<?= (int)$row['id']; ?>"><button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-xmark"></i> Tolak</button></form>
+                                            <form action="<?= e(base_url('admin/borrow/approve.php')); ?>" method="POST" data-confirm="Setujui permintaan ini?"><?= csrf_input_field(); ?><input type="hidden" name="id" value="<?= (int)$row['id']; ?>"><button class="btn btn-success btn-sm" type="submit"><i class="fas fa-check"></i> Setujui</button></form>
+                                            <form action="<?= e(base_url('admin/borrow/reject.php')); ?>" method="POST" data-confirm="Tolak permintaan ini?"><?= csrf_input_field(); ?><input type="hidden" name="id" value="<?= (int)$row['id']; ?>"><button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-xmark"></i> Tolak</button></form>
                                         <?php elseif ($status === 'approved') : ?>
-                                            <form action="<?= e(base_url('admin/borrow/return.php')); ?>" method="POST" onsubmit="return confirm('Tandai barang sudah dikembalikan?');"><?= csrf_input_field(); ?><input type="hidden" name="id" value="<?= (int)$row['id']; ?>"><button class="btn btn-info btn-sm" type="submit"><i class="fas fa-rotate-left"></i> Selesai</button></form>
+                                            <form action="<?= e(base_url('admin/borrow/return.php')); ?>" method="POST" data-confirm="Tandai barang sudah dikembalikan?"><?= csrf_input_field(); ?><input type="hidden" name="id" value="<?= (int)$row['id']; ?>"><button class="btn btn-info btn-sm" type="submit"><i class="fas fa-rotate-left"></i> Selesai</button></form>
                                         <?php else : ?>
                                             <span class="badge badge-secondary">Selesai</span>
                                         <?php endif; ?>

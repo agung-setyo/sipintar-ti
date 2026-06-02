@@ -88,10 +88,10 @@ $pageTitle = 'Ajukan Pinjaman';
         <div class="stats-grid">
             <div class="stat-card warning"><div class="stat-card-body"><div class="stat-content"><h5>Pengajuan Aktif</h5><div class="stat-number"><?= $active_count; ?></div><div class="stat-change">Menunggu atau sedang dipinjam</div></div><div class="stat-icon"><i class="fas fa-clipboard-list"></i></div></div></div>
             <div class="stat-card info"><div class="stat-card-body"><div class="stat-content"><h5>Durasi Maksimal</h5><div class="stat-number">14</div><div class="stat-change">Hari peminjaman</div></div><div class="stat-icon"><i class="fas fa-calendar-days"></i></div></div></div>
-            <div class="stat-card success"><div class="stat-card-body"><div class="stat-content"><h5>Status Awal</h5><div class="stat-number" style="font-size:1.5rem">Menunggu</div><div class="stat-change">Diproses oleh admin</div></div><div class="stat-icon"><i class="fas fa-hourglass-half"></i></div></div></div>
-            <div class="stat-card"><div class="stat-card-body"><div class="stat-content"><h5>Riwayat</h5><div class="stat-number" style="font-size:1.5rem">Tersimpan</div><div class="stat-change">Pantau dari menu riwayat</div></div><div class="stat-icon"><i class="fas fa-clock-rotate-left"></i></div></div></div>
+            <div class="stat-card success"><div class="stat-card-body"><div class="stat-content"><h5>Status Awal</h5><div class="stat-number fs-4">Menunggu</div><div class="stat-change">Diproses oleh admin</div></div><div class="stat-icon"><i class="fas fa-hourglass-half"></i></div></div></div>
+            <div class="stat-card"><div class="stat-card-body"><div class="stat-content"><h5>Riwayat</h5><div class="stat-number fs-4">Tersimpan</div><div class="stat-change">Pantau dari menu riwayat</div></div><div class="stat-icon"><i class="fas fa-clock-rotate-left"></i></div></div></div>
         </div>
-        <div class="form-card" style="max-width:900px">
+        <div class="form-card max-w-900">
             <div class="card-header-clean"><h3>Form Pengajuan</h3></div>
             <div class="card-body-clean">
                 <?php if ($error): ?><div class="alert alert-danger"><?= e($error); ?></div><?php endif; ?>
