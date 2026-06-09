@@ -1,0 +1,22 @@
+<?php
+include_once __DIR__ . '/../../config/session.php';
+include_once __DIR__ . '/../../config/app.php';
+include_once __DIR__ . '/../../config/security.php';
+include_once __DIR__ . '/../../config/database.php';
+include_once __DIR__ . '/../../middleware/auth.php';
+include_once __DIR__ . '/../../middleware/admin.php';
+include_once __DIR__ . '/../../helpers/csrf_helper.php';
+include_once __DIR__ . '/../../helpers/log_helper.php';
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') redirect_to('admin/items/index.php');
+if (!verify_csrf_token($_POST['csrf_token'] ?? '')) redirect_to('admin/items/index.php?error=' . urlencode('Sesi tidak valid. Silakan coba lagi.'));
+$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+$active = mysqli_prepare($conn, "SELECT COUNT(*) AS total FROM borrow_details bd WHERE bd.item_id = ?");
+mysqli_stmt_bind_param($active, 'i', $id);
+mysqli_stmt_execute($active);
+$total = (int)mysqli_fetch_assoc(mysqli_stmt_get_result($active))['total'];
+if ($total > 0) redirect_to('admin/items/index.php?error=' . urlencode('Barang sudah memiliki riwayat peminjaman. Ubah status menjadi tidak tersedia jika tidak ingin dipinjam lagi.'));
+$stmt = mysqli_prepare($conn, 'DELETE FROM items WHERE id = ?');
+mysqli_stmt_bind_param($stmt, 'i', $id);
+if (!mysqli_stmt_execute($stmt)) redirect_to('admin/items/index.php?error=' . urlencode('Barang gagal dihapus.'));
+save_log($conn, $_SESSION['user_id'], 'DELETE', 'items', $id, 'Menghapus barang');
+redirect_to('admin/items/index.php?success=' . urlencode('Barang berhasil dihapus.'));

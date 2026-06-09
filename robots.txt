@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /config/
+Disallow: /helpers/
+Disallow: /middleware/
+Disallow: /database/
+Disallow: /docs/
+Disallow: /scripts/
+
+Sitemap: https://blue-mantis-483450.hostingersite.com/sitemap.xml

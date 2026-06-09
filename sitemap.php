@@ -1,0 +1,14 @@
+<?php
+require_once __DIR__ . '/config/security_headers.php';
+send_security_headers(false);
+header('Content-Type: application/xml; charset=UTF-8');
+echo '<?xml version="1.0" encoding="UTF-8"?>' . "
+";
+?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://blue-mantis-483450.hostingersite.com/</loc></url>
+  <url><loc>https://blue-mantis-483450.hostingersite.com/masuk</loc></url>
+  <url><loc>https://blue-mantis-483450.hostingersite.com/masuk-admin</loc></url>
+  <url><loc>https://blue-mantis-483450.hostingersite.com/masuk-peminjam</loc></url>
+  <url><loc>https://blue-mantis-483450.hostingersite.com/daftar</loc></url>
+</urlset>

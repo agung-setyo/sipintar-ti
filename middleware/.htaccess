@@ -1,0 +1,10 @@
+Options -Indexes
+IndexIgnore *
+Require all denied
+
+<IfModule mod_headers.c>
+    Header always unset X-Powered-By
+    Header onsuccess unset X-Powered-By
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' https://cdn.jsdelivr.net; script-src-elem 'self' https://cdn.jsdelivr.net; script-src-attr 'none'; style-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src-elem 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src-attr 'none'; font-src 'self' data: https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; media-src 'self'; manifest-src 'self'; worker-src 'self'; frame-src 'none'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests"
+</IfModule>

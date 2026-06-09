@@ -1,0 +1,103 @@
+Options -Indexes -MultiViews
+IndexIgnore *
+DirectoryIndex index.php
+ErrorDocument 403 /error.php
+ErrorDocument 404 /error.php
+ServerSignature Off
+FileETag None
+
+<IfModule mod_headers.c>
+    Header always unset X-Powered-By
+    Header always unset ETag
+    Header onsuccess unset X-Powered-By
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+    Header always set Cross-Origin-Resource-Policy "same-origin"
+    Header always set Permissions-Policy "accelerometer=(), autoplay=(), camera=(), clipboard-read=(), clipboard-write=(self), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), usb=(), xr-spatial-tracking=()"
+    Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' https://cdn.jsdelivr.net; script-src-elem 'self' https://cdn.jsdelivr.net; script-src-attr 'none'; style-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src-elem 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src-attr 'none'; font-src 'self' data: https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; media-src 'self'; manifest-src 'self'; worker-src 'self'; frame-src 'none'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests"
+
+    <FilesMatch "^(favicon\.ico|.*\.(?:css|js|ico|png|jpg|jpeg|gif|svg|webp|woff2?))$">
+        Header always set Cache-Control "public, max-age=86400"
+    </FilesMatch>
+
+    <FilesMatch "^(robots\.txt|sitemap\.xml)$">
+        Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        Header always set X-Content-Type-Options "nosniff"
+        Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+        Header always set Pragma "no-cache"
+        Header always set Expires "0"
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_mime.c>
+    AddType image/x-icon .ico
+    AddType application/xml .xml
+    AddType text/plain .txt
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteRule ^robots\.txt$ robots.php [L,QSA,NC]
+    RewriteRule ^sitemap\.xml$ sitemap.php [L,QSA,NC]
+
+    RewriteRule ^(?:config|helpers|middleware|database|docs|scripts|includes|secure_storage|\.github)(?:/|$) - [F,L,NC]
+
+    RewriteRule ^masuk/?$ auth/login.php [L,QSA,NC]
+    RewriteRule ^masuk-admin/?$ auth/admin_login.php [L,QSA,NC]
+    RewriteRule ^masuk-peminjam/?$ auth/user_login.php [L,QSA,NC]
+    RewriteRule ^daftar/?$ auth/register.php [L,QSA,NC]
+    RewriteRule ^proses-masuk/?$ auth/process_login.php [L,QSA,NC]
+    RewriteRule ^proses-daftar/?$ auth/process_register.php [L,QSA,NC]
+    RewriteRule ^ubah-password/?$ auth/change_password.php [L,QSA,NC]
+    RewriteRule ^proses-ubah-password/?$ auth/process_change_password.php [L,QSA,NC]
+    RewriteRule ^keluar/?$ auth/logout.php [L,QSA,NC]
+
+    RewriteRule ^panel/?$ admin/dashboard.php [L,QSA,NC]
+    RewriteRule ^permintaan/?$ admin/borrow/index.php [L,QSA,NC]
+    RewriteRule ^permintaan/setujui/?$ admin/borrow/approve.php [L,QSA,NC]
+    RewriteRule ^permintaan/tolak/?$ admin/borrow/reject.php [L,QSA,NC]
+    RewriteRule ^permintaan/kembali/?$ admin/borrow/return.php [L,QSA,NC]
+    RewriteRule ^inventaris/?$ admin/items/index.php [L,QSA,NC]
+    RewriteRule ^inventaris/tambah/?$ admin/items/create.php [L,QSA,NC]
+    RewriteRule ^inventaris/edit/?$ admin/items/edit.php [L,QSA,NC]
+    RewriteRule ^inventaris/hapus/?$ admin/items/delete.php [L,QSA,NC]
+    RewriteRule ^kategori/?$ admin/categories/index.php [L,QSA,NC]
+    RewriteRule ^kategori/tambah/?$ admin/categories/create.php [L,QSA,NC]
+    RewriteRule ^kategori/edit/?$ admin/categories/edit.php [L,QSA,NC]
+    RewriteRule ^kategori/hapus/?$ admin/categories/delete.php [L,QSA,NC]
+    RewriteRule ^aktivitas/?$ admin/logs/index.php [L,QSA,NC]
+    RewriteRule ^notifikasi-sistem/?$ admin/security-events/index.php [L,QSA,NC]
+
+    RewriteRule ^beranda/?$ peminjam/dashboard.php [L,QSA,NC]
+    RewriteRule ^katalog/?$ peminjam/items.php [L,QSA,NC]
+    RewriteRule ^ajukan/?$ peminjam/borrow.php [L,QSA,NC]
+    RewriteRule ^riwayat/?$ peminjam/history.php [L,QSA,NC]
+    RewriteRule ^batalkan/?$ peminjam/cancel.php [L,QSA,NC]
+
+    RewriteCond %{REQUEST_METHOD} =GET
+    RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.php[?\s] [NC]
+    RewriteRule ^(.*/)?index\.php$ /%1 [R=301,L,NE]
+
+    RewriteCond %{REQUEST_METHOD} =GET
+    RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[?\s] [NC]
+    RewriteRule ^(.+)\.php$ /%1 [R=301,L,NE]
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.+?)/?$ $1.php [L,QSA]
+</IfModule>
+
+<FilesMatch "(^\.|\.env|composer\.(json|lock)|phpunit\.xml|README\.md|LICENSE|.*\.(sql|md|bak|backup|zip|tar|gz|7z|rar|log|ini|yml|yaml|lock))$">
+    Require all denied
+</FilesMatch>
+
+
+<IfModule mod_php.c>
+    php_flag expose_php Off
+    php_flag session.cookie_httponly On
+    php_flag session.use_strict_mode On
+</IfModule>

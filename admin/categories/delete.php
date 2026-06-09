@@ -1,0 +1,22 @@
+<?php
+include_once __DIR__ . '/../../config/session.php';
+include_once __DIR__ . '/../../config/app.php';
+include_once __DIR__ . '/../../config/security.php';
+include_once __DIR__ . '/../../config/database.php';
+include_once __DIR__ . '/../../middleware/auth.php';
+include_once __DIR__ . '/../../middleware/admin.php';
+include_once __DIR__ . '/../../helpers/csrf_helper.php';
+include_once __DIR__ . '/../../helpers/log_helper.php';
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') redirect_to('admin/categories/index.php');
+if (!verify_csrf_token($_POST['csrf_token'] ?? '')) redirect_to('admin/categories/index.php?error=' . urlencode('Sesi tidak valid. Silakan coba lagi.'));
+$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+$check = mysqli_prepare($conn, 'SELECT COUNT(*) AS total FROM items WHERE category_id = ?');
+mysqli_stmt_bind_param($check, 'i', $id);
+mysqli_stmt_execute($check);
+$total = (int)mysqli_fetch_assoc(mysqli_stmt_get_result($check))['total'];
+if ($total > 0) redirect_to('admin/categories/index.php?error=' . urlencode('Kategori masih memiliki barang. Pindahkan atau hapus barang terlebih dahulu.'));
+$stmt = mysqli_prepare($conn, 'DELETE FROM categories WHERE id = ?');
+mysqli_stmt_bind_param($stmt, 'i', $id);
+mysqli_stmt_execute($stmt);
+save_log($conn, $_SESSION['user_id'], 'DELETE', 'categories', $id, 'Menghapus kategori');
+redirect_to('admin/categories/index.php?success=' . urlencode('Kategori berhasil dihapus.'));
