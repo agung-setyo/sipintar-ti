@@ -23,7 +23,10 @@ $homePath = $userRole === 'admin' ? 'admin/dashboard.php' : 'peminjam/dashboard.
                 <small><?= e($userRole === 'admin' ? 'Admin' : 'Peminjam'); ?></small>
             </span>
         </div>
+<<<<<<< HEAD
         <a href="<?= e(base_url('auth/change_password.php')); ?>" class="btn btn-outline-primary btn-sm" aria-label="Ubah password"><i class="fas fa-key"></i> Password</a>
+=======
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
         <a href="<?= e(base_url('auth/logout.php')); ?>" class="btn btn-outline-danger btn-sm" aria-label="Keluar dari akun"><i class="fas fa-right-from-bracket"></i> Keluar</a>
     </div>
 </nav>

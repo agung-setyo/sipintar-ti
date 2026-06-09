@@ -1,10 +1,22 @@
 <?php
+<<<<<<< HEAD
 if (basename($_SERVER['SCRIPT_FILENAME'] ?? '') === basename(__FILE__)) { http_response_code(403); exit('403 Forbidden'); }
 
+=======
+/**
+ * Konfigurasi aplikasi dan helper URL.
+ *
+ * Helper URL aplikasi.
+ */
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
 if (!defined('APP_NAME')) {
     define('APP_NAME', 'SIPINTAR-TI');
 }
 
+<<<<<<< HEAD
+=======
+// Optional: initialize Sentry if sample file exists and package is installed
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
 if (file_exists(__DIR__ . '/../includes/sentry.php')) {
     include_once __DIR__ . '/../includes/sentry.php';
 }
@@ -13,7 +25,11 @@ if (!function_exists('app_base_path')) {
     function app_base_path(): string
     {
         $script = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+<<<<<<< HEAD
         $knownDirs = ['/admin/', '/auth/', '/peminjam/', '/includes/', '/config/', '/middleware/', '/helpers/', '/assets/'];
+=======
+        $knownDirs = ['/admin/', '/auth/', '/peminjam/', '/includes/', '/config/', '/middleware/', '/helpers/'];
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
 
         foreach ($knownDirs as $dir) {
             $pos = strpos($script, $dir);
@@ -22,6 +38,7 @@ if (!function_exists('app_base_path')) {
             }
         }
 
+<<<<<<< HEAD
         $scriptName = basename($script);
         if (in_array($scriptName, ['index.php', 'error.php', 'healthz.php', 'logout.php', 'robots.php', 'sitemap.php'], true)) {
             $dir = str_replace('\\', '/', dirname($script));
@@ -108,6 +125,14 @@ if (!function_exists('public_path_for_alias')) {
         $routes = array_flip(public_route_aliases());
 
         return $routes[$alias] ?? null;
+=======
+        $dir = str_replace('\\', '/', dirname($script));
+        if ($dir === '/' || $dir === '.' || $dir === '\\') {
+            return '';
+        }
+
+        return rtrim($dir, '/');
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
     }
 }
 
@@ -115,7 +140,11 @@ if (!function_exists('base_url')) {
     function base_url(string $path = ''): string
     {
         $base = app_base_path();
+<<<<<<< HEAD
         $path = public_route($path);
+=======
+        $path = ltrim($path, '/');
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
 
         if ($path === '') {
             return $base === '' ? '/' : $base . '/';
@@ -135,7 +164,11 @@ if (!function_exists('asset_url')) {
 if (!function_exists('redirect_to')) {
     function redirect_to(string $path): void
     {
+<<<<<<< HEAD
         header('Location: ' . base_url($path), true, 303);
+=======
+        header('Location: ' . base_url($path));
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
         exit;
     }
 }
@@ -146,6 +179,7 @@ if (!function_exists('e')) {
         return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
     }
 }
+<<<<<<< HEAD
 
 if (!function_exists('enforce_canonical_public_url')) {
     function enforce_canonical_public_url(): void
@@ -193,4 +227,6 @@ if (!function_exists('enforce_canonical_public_url')) {
 }
 
 enforce_canonical_public_url();
+=======
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
 ?>

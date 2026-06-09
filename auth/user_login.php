@@ -14,8 +14,16 @@ $peminjamLoggedIn = isset($logins['peminjam']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Peminjam | SIPINTAR-TI</title>
+<<<<<<< HEAD
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLndnUkP4OYlT6DkL4kSVV8Vsl5W0RXp2Pl3T/jCGX0gLexyO3J54+lZ7c2tXj4w==" crossorigin="anonymous">
+=======
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
     <link rel="stylesheet" href="<?= e(asset_url('css/auth.css')); ?>?v=20260520-split-login">
 </head>
 <body>
@@ -37,7 +45,10 @@ $peminjamLoggedIn = isset($logins['peminjam']);
                 </div>
                 <?php if (isset($_GET['success'])) : ?><div class="alert alert-success" role="status" aria-live="polite" id="form-success"><i class="fas fa-check-circle"></i> Registrasi berhasil. Silakan login.</div><?php endif; ?>
                 <?php if (isset($_GET['error'])) : ?><div class="alert alert-danger" role="alert" aria-live="assertive" id="form-error"><i class="fas fa-circle-exclamation"></i> <?= e($_GET['error']); ?></div><?php endif; ?>
+<<<<<<< HEAD
                 <?php if (isset($_SESSION['flash'])) : ?><div class="alert alert-danger" role="alert" aria-live="assertive" id="form-error"><i class="fas fa-circle-exclamation"></i> <?= e($_SESSION['flash']); unset($_SESSION['flash']); ?></div><?php endif; ?>
+=======
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
                 <form action="<?= e(base_url('auth/process_login.php')); ?>" method="POST" autocomplete="on" novalidate aria-describedby="form-error form-success">
                     <input type="hidden" name="csrf_token" value="<?= e($csrf); ?>">
                     <input type="hidden" name="login_as" value="peminjam">

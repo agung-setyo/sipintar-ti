@@ -1,5 +1,8 @@
 <?php
+<<<<<<< HEAD
 if (basename($_SERVER['SCRIPT_FILENAME'] ?? '') === basename(__FILE__)) { http_response_code(403); exit('403 Forbidden'); }
+=======
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
 
 function clean_input($data)
 {

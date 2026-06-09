@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/config/session.php';
 include_once __DIR__ . '/config/app.php';
+<<<<<<< HEAD
 
 $requestPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 $routePath = trim($requestPath, '/');
@@ -23,6 +24,8 @@ if ($targetPath !== null) {
 }
 
 include_once __DIR__ . '/config/security.php';
+=======
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
 include_once __DIR__ . '/config/database.php';
 
 if (isset($_SESSION['role'])) {
@@ -47,14 +50,31 @@ if (isset($conn)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIPINTAR-TI | Sistem Peminjaman Inventaris</title>
+<<<<<<< HEAD
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLndnUkP4OYlT6DkL4kSVV8Vsl5W0RXp2Pl3T/jCGX0gLexyO3J54+lZ7c2tXj4w==" crossorigin="anonymous">
     <link rel="stylesheet" href="<?= e(asset_url('css/auth.css')); ?>?v=20260520-app-v2">
+=======
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= e(asset_url('css/auth.css')); ?>?v=20260520-app-v2">
+    <style>
+        .landing-nav{position:fixed;top:0;left:0;right:0;z-index:10;background:rgba(255,255,255,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(226,232,240,.9)}
+        .landing-nav .inner{max-width:1180px;margin:0 auto;padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}.landing-actions{display:flex;gap:.6rem;flex-wrap:wrap}.btn-main{display:inline-flex;align-items:center;gap:.45rem;border-radius:14px;padding:.72rem 1rem;font-weight:900;text-decoration:none}.btn-main.primary{background:var(--primary);color:#fff}.btn-main.secondary{background:#fff;color:var(--primary);border:1px solid var(--border)}.landing-hero{min-height:100vh;display:flex;align-items:center;padding:8rem 1.25rem 4rem}.landing-container{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr .85fr;gap:3rem;align-items:center}.landing-title{font-size:clamp(2.5rem,6vw,5rem);line-height:.98;letter-spacing:-.07em;font-weight:950;margin:1rem 0}.landing-copy{color:var(--muted);font-size:1.1rem;line-height:1.75;max-width:620px}.landing-card{background:#fff;border:1px solid var(--border);border-radius:30px;padding:1.4rem;box-shadow:var(--shadow)}.preview-box{border-radius:22px;background:linear-gradient(135deg,#0f766e,#115e59);color:#fff;padding:1.3rem}.preview-list{display:grid;gap:.8rem;margin-top:1rem}.preview-list div{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:.9rem}.landing-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}.landing-stat{background:rgba(255,255,255,.76);border:1px solid var(--border);border-radius:20px;padding:1rem}.landing-stat strong{display:block;font-size:2rem}.landing-stat span{color:var(--muted)}@media(max-width:900px){.landing-container{grid-template-columns:1fr}.landing-card{display:none}.landing-stats{grid-template-columns:1fr}}
+    </style>
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
 </head>
 <body>
     <nav class="landing-nav">
         <div class="inner">
+<<<<<<< HEAD
             <a class="brand-lockup landing-brand" href="<?= e(base_url()); ?>">
+=======
+            <a class="brand-lockup" href="<?= e(base_url()); ?>" style="margin:0;text-decoration:none;color:inherit">
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
                 <span class="brand-icon"><i class="fas fa-box-open"></i></span>
                 <span class="brand-text"><strong>SIPINTAR-TI</strong><small>Sistem Peminjaman Inventaris</small></span>
             </a>
@@ -71,7 +91,11 @@ if (isset($conn)) {
                 <div class="hero-badge"><i class="fas fa-building"></i> Inventaris Teknik Informatika</div>
                 <h1 class="landing-title">Peminjaman barang jadi lebih praktis dan teratur.</h1>
                 <p class="landing-copy">SIPINTAR-TI membantu peminjam mengajukan barang, melihat status permintaan, dan membantu admin mengelola inventaris dengan tampilan yang sederhana.</p>
+<<<<<<< HEAD
                 <div class="landing-actions landing-actions-main">
+=======
+                <div class="landing-actions" style="margin-top:1.6rem">
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
                     <a class="btn-main primary" href="<?= e(base_url('auth/user_login.php')); ?>"><i class="fas fa-user-graduate"></i> Login Peminjam</a>
                     <a class="btn-main secondary" href="<?= e(base_url('auth/admin_login.php')); ?>"><i class="fas fa-user-tie"></i> Login Admin</a>
                     <a class="btn-main secondary" href="<?= e(base_url('auth/register.php')); ?>"><i class="fas fa-user-plus"></i> Buat Akun</a>
@@ -84,7 +108,11 @@ if (isset($conn)) {
             </section>
             <aside class="landing-card">
                 <div class="preview-box">
+<<<<<<< HEAD
                     <h3>Alur Peminjaman</h3>
+=======
+                    <h3 style="font-weight:900;margin:0">Alur Peminjaman</h3>
+>>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
                     <div class="preview-list">
                         <div><i class="fas fa-search"></i> Pilih barang dari katalog inventaris.</div>
                         <div><i class="fas fa-calendar-days"></i> Tentukan tanggal pinjam dan kembali.</div>
