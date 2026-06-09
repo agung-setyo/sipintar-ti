@@ -202,10 +202,7 @@ tbody tr:hover { background: #f8fafc; }
 .alert-info { background: #e0f2fe; color: #075985; }
 .max-w-240 { max-width: 240px; }
 .max-w-320 { max-width: 320px; }
-<<<<<<< HEAD
 .max-w-720 { max-width: 720px; }
-=======
->>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
 .max-w-760 { max-width: 760px; }
 .max-w-900 { max-width: 900px; }
 .max-w-920 { max-width: 920px; }

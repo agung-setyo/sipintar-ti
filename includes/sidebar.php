@@ -35,10 +35,7 @@ function active_menu(string $needle, string $current): string
     </nav>
 
     <div class="sidebar-foot">
-<<<<<<< HEAD
         <a href="<?= e(base_url('auth/change_password.php')); ?>"><i class="fas fa-key"></i><span>Ubah Password</span></a>
-=======
->>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
         <a href="<?= e(base_url('auth/logout.php')); ?>"><i class="fas fa-right-from-bracket"></i><span>Keluar</span></a>
     </div>
 </aside>

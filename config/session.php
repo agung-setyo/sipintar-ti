@@ -1,8 +1,5 @@
 <?php
-<<<<<<< HEAD
 if (basename($_SERVER['SCRIPT_FILENAME'] ?? '') === basename(__FILE__)) { http_response_code(403); exit('403 Forbidden'); }
-=======
->>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
 if (session_status() === PHP_SESSION_NONE) {
     $is_https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
         || (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443);

@@ -186,7 +186,6 @@ a:hover { color: var(--primary-dark); }
 }
 
 .landing-nav{position:fixed;top:0;left:0;right:0;z-index:10;background:rgba(255,255,255,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(226,232,240,.9);}
-<<<<<<< HEAD
 .landing-nav .inner{max-width:1280px;margin:0 auto;padding:.85rem clamp(1rem,4vw,2rem);display:flex;justify-content:space-between;align-items:center;gap:1rem;}
 .landing-brand{margin:0;text-decoration:none;color:inherit;}
 .landing-actions{display:flex;gap:.6rem;flex-wrap:wrap;}
@@ -257,20 +256,3 @@ a:hover { color: var(--primary-dark); }
         border-left: 0;
     }
 }
-=======
-.landing-actions{display:flex;gap:.6rem;flex-wrap:wrap;}
-.landing-hero{min-height:100vh;display:flex;align-items:center;padding:8rem 1.25rem 4rem;}
-.landing-container{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr .85fr;gap:3rem;align-items:center;}
-.landing-title{font-size:clamp(2.5rem,6vw,5rem);line-height:.98;letter-spacing:-.07em;font-weight:950;margin:1rem 0;}
-.landing-copy{color:var(--muted);font-size:1.1rem;line-height:1.75;max-width:620px;}
-.landing-card{background:#fff;border:1px solid var(--border);border-radius:30px;padding:1.4rem;box-shadow:var(--shadow);}
-.preview-box{border-radius:22px;background:linear-gradient(135deg,#0f766e,#115e59);color:#fff;padding:1.3rem;}
-.preview-list{display:grid;gap:.8rem;margin-top:1rem;}
-.preview-list div{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:.9rem;}
-.landing-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;}
-.landing-stat{background:rgba(255,255,255,.76);border:1px solid var(--border);border-radius:20px;padding:1rem;}
-.landing-stat strong{display:block;font-size:2rem;}
-.landing-stat span{color:var(--muted);}
-.preview-box h3{font-weight:900;margin:0;}
-@media(max-width:900px){.landing-container{grid-template-columns:1fr}.landing-card{display:none}.landing-stats{grid-template-columns:1fr}}
->>>>>>> 4362cd300695d6297af8d50b612426b7fde8766d
